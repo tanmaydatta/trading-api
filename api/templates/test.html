@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="display">
+  
+</div>
+</body>
+<script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+  <script type="text/javascript">
+
+    $.ajax({
+        url: 'http://www.awesummly.com/api/india/top/',
+        // type: "GET",
+        dataType: 'json',
+        crossDomain : true,
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (data) {
+              console.log(data);
+        }
+    });
+  </script>
+</html>
