@@ -21,7 +21,7 @@ from django.core.mail import send_mail as sm
 
 def iq_buy(tick, ws):
 	# global buyprice
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	obj = threads_ws[ws]
 	if tick[0]['last_price'] <= 0.0:
 		return
@@ -41,7 +41,7 @@ def iq_buy(tick, ws):
 
 	sellprice = []
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	sellprice.append(buyprice[0]-obj.dpr/3.0)
 	sellprice.append(buyprice[0]-obj.dpr/8.0)
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
@@ -72,7 +72,7 @@ def iq_buy(tick, ws):
 	if to_buy_i >= obj.max_buy:
 		return
 	if bid >= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -187,7 +187,7 @@ def multi_buy(tick, ws):
 
 	sellprice = []
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	sellprice.append(buyprice[0]-obj.dpr/3.0)
 	sellprice.append(buyprice[0]-obj.dpr/8.0)
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
@@ -212,7 +212,7 @@ def multi_buy(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid >= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -339,7 +339,7 @@ def multi_buy_esl(tick, ws):
 		qsum = qsum + qty[i-1]
 		sellprice.append(wa/qsum)
 	
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 
 	bid = tick[0]['last_price']
 	# to_buy = buyprice[0]
@@ -354,7 +354,7 @@ def multi_buy_esl(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid >= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -457,7 +457,7 @@ def dsp_buy(tick, ws):
 
 	sellprice = []
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*obj.lots)/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
@@ -471,7 +471,7 @@ def dsp_buy(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	# return
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	to_buy_i = obj.to_buy_i
 	if bid <= sellprice[to_buy_i]:
 		obj.ws.close()
@@ -482,7 +482,7 @@ def dsp_buy(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid >= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -562,7 +562,7 @@ def dsp_buy(tick, ws):
 
 def iq_sell(tick, ws):
 	# global buyprice
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	obj = threads_ws[ws]
 	if tick[0]['last_price'] <= 0.0:
 		return
@@ -618,7 +618,7 @@ def iq_sell(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid <= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "selling " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -731,7 +731,7 @@ def multi_sell(tick, ws):
 
 	sellprice = []
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	sellprice.append(buyprice[0]+obj.dpr/3.0)
 	sellprice.append(buyprice[0]+obj.dpr/8.0)
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
@@ -756,7 +756,7 @@ def multi_sell(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid <= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "selling " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -883,7 +883,7 @@ def multi_sell_esl(tick, ws):
 		qsum = qsum + qty[i-1]
 		sellprice.append(wa/qsum)
 	
-	ipdb.set_trace()
+	#ipdb.set_trace()
 
 	bid = tick[0]['last_price']
 	# to_buy = buyprice[0]
@@ -898,7 +898,7 @@ def multi_sell_esl(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid <= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "selling " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -1001,7 +1001,7 @@ def dsp_sell(tick, ws):
 
 	sellprice = []
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*obj.lots)/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
@@ -1011,7 +1011,7 @@ def dsp_sell(tick, ws):
 		sellprice.append(wa/qsum)
 	
 	
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	bid = tick[0]['last_price']
 	# to_buy = buyprice[0]
 	#print bid
@@ -1025,7 +1025,7 @@ def dsp_sell(tick, ws):
 	if to_buy_i >= len(buyprice):
 		return
 	if bid <= buyprice[to_buy_i]:
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		print "selling " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
@@ -1145,7 +1145,7 @@ def myround(x, prec=2, base=.05):
 @csrf_exempt
 def home_st(request, strategy):
 	if request.method == "POST":
-		# ipdb.set_trace()
+		# #ipdb.set_trace()
 		global st
 		if 'thread_' + request.POST['ins_token'] in threads:
 			return response("failed", "already running")
@@ -1246,7 +1246,7 @@ def stop(request, symbol):
 	# st = symbol.split('$')[1]
 	symbol = "thread_" + symbol
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	if symbol in threads:
 		obj = threads[symbol]
 		obj.ws.close()
@@ -1263,7 +1263,7 @@ def stop_all(request):
 	# st = symbol.split('$')[1]
 	# symbol = "thread_" + symbol
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	stops = threads.keys()
 	for symbol in stops:
 		obj = threads[symbol]
@@ -1287,7 +1287,7 @@ def search(request,symbol):
 		# obj = Instruments(name=order['name'],symbol=order['tradingsymbol'],token=str(order['instrument_token']),exchange=order['exchange'],tick_size=str(order['tick_size']))
 		# obj.save()
 
-	# ipdb.set_trace()
+	# #ipdb.set_trace()
 	# return response("success", "")
 	return JsonResponse({"res":res})
 
