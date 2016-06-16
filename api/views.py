@@ -67,6 +67,7 @@ def iq_buy(tick, ws):
 		return
 	if bid <= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -205,6 +206,7 @@ def multi_buy(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid <= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -347,6 +349,7 @@ def multi_buy_esl(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid <= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -475,6 +478,7 @@ def dsp_buy(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid <= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -611,6 +615,7 @@ def iq_sell(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid >= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -749,6 +754,7 @@ def multi_sell(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid >= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -891,6 +897,7 @@ def multi_sell_esl(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid >= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -1018,6 +1025,7 @@ def dsp_sell(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if bid >= sellprice[to_buy_i]:
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
 		return
 	if to_buy_i >= obj.max_buy:
@@ -1250,6 +1258,7 @@ def stop(request, symbol):
 	if symbol in threads:
 		obj = threads[symbol]
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(symbol)+' stopped Manually','Symbol Stopped' , ) )
 		threads.pop(symbol, None)
 	else:
 		return response("failed", "no such symbol running")
@@ -1268,6 +1277,7 @@ def stop_all(request):
 	for symbol in stops:
 		obj = threads[symbol]
 		obj.ws.close()
+		thread.start_new_thread( send_mail, ( obj, str(symbol)+' stopped Manually','Symbol Stopped' , ) )
 		threads.pop(symbol, None)
 
 	return response("success", "successfully stopped")
