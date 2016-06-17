@@ -65,7 +65,7 @@ def iq_buy(tick, ws):
 	to_buy_i = obj.to_buy_i
 	if to_buy_i >= len(buyprice):
 		return
-	if bid <= sellprice[to_buy_i]:
+	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -204,7 +204,7 @@ def multi_buy(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	if bid <= sellprice[to_buy_i]:
+	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -347,7 +347,7 @@ def multi_buy_esl(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	if bid <= sellprice[to_buy_i]:
+	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -476,7 +476,7 @@ def dsp_buy(tick, ws):
 	# return
 	# #ipdb.set_trace()
 	to_buy_i = obj.to_buy_i
-	if bid <= sellprice[to_buy_i]:
+	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -613,7 +613,7 @@ def iq_sell(tick, ws):
 
 
 	to_buy_i = obj.to_buy_i
-	if bid >= sellprice[to_buy_i]:
+	if bid >= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -752,7 +752,7 @@ def multi_sell(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	if bid >= sellprice[to_buy_i]:
+	if bid >= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -895,7 +895,7 @@ def multi_sell_esl(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	if bid >= sellprice[to_buy_i]:
+	if bid >= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -1023,7 +1023,7 @@ def dsp_sell(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	if bid >= sellprice[to_buy_i]:
+	if bid >= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
@@ -1142,7 +1142,7 @@ def myround(x, prec=2, base=.05):
 	# # 	place order here
 	# # 	right now just testing so no order placed
 
-	# 	if bid <= sellprice[to_buy_i]:
+	# 	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
 	# 		print "SL at " + str(sellprice[to_buy_i]) + "complete at " + str(datetime.utcnow().date()) +str(datetime.utcnow().time())
 	# 		# to_buy_i = to_buy_i + 1
 	# 		curr_qty = curr_qty + qty[to_buy_i]
