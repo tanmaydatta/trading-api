@@ -23,8 +23,6 @@ def mon_buy(tick, ws):
 	# global buyprice
 	# #ipdb.set_trace()
 	obj = threads_ws[ws]
-	if tick[0]['last_price'] <= 0.0:
-		return
 	print tick[0]['last_price']
 	# print tick[0]['last_price']
 	# to_buy_i = 
@@ -58,7 +56,10 @@ def mon_buy(tick, ws):
 
 
 
-
+	# print buyprice
+	# print sellprice
+	if tick[0]['last_price'] <= 0.0:
+		return
 	# return
 	bid = tick[0]['last_price']
 	# to_buy = buyprice[0]
@@ -1015,13 +1016,13 @@ def mon_dsp_sell(tick, ws):
 		return
 	if to_buy_i >= len(buyprice):
 		return
-	if bid >= buyprice[to_buy_i]:
+	if bid <= buyprice[to_buy_i]:
 		# #ipdb.set_trace()
 		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
 							exchange=obj.exchange,
-							transaction_type="BUY",
+							transaction_type="SELL",
 							quantity=qty[to_buy_i],
 							order_type=obj.order_type,
 							product=obj.product_type,
@@ -1045,7 +1046,7 @@ def mon_dsp_sell(tick, ws):
 				try:
 					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
 									exchange=obj.exchange,
-									transaction_type="SELL",
+									transaction_type="BUY",
 									quantity=obj.curr_qty+obj.qty,
 									order_type="SL-M",
 									product=obj.product_type,
@@ -1060,7 +1061,7 @@ def mon_dsp_sell(tick, ws):
 					print str(e)
 					thread.start_new_thread(send_mail, ( obj, str(e), "error message"))
 			try:
-				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty+obj.qty,product=obj.product_type)
+				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty+obj.qty,product=obj.product_type)
 
 				print "success modified" + str(obj.order_id)
 				#email = #emailMessage('Sell Order Modified', "success, order modified. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
@@ -1074,7 +1075,7 @@ def mon_dsp_sell(tick, ws):
 			try:
 				obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
 								exchange=obj.exchange,
-								transaction_type="SELL",
+								transaction_type="BUY",
 								quantity=obj.curr_qty+obj.qty,
 								order_type="SL-M",
 								product=obj.product_type,
@@ -1843,7 +1844,7 @@ def multi_dsp_sell(tick, ws):
 		try:
 			order_id = kite.order_place(tradingsymbol=obj.symbol,
 							exchange=obj.exchange,
-							transaction_type="BUY",
+							transaction_type="SELL",
 							quantity=qty[to_buy_i],
 							order_type=obj.order_type,
 							product=obj.product_type,
@@ -1867,7 +1868,7 @@ def multi_dsp_sell(tick, ws):
 				try:
 					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
 									exchange=obj.exchange,
-									transaction_type="SELL",
+									transaction_type="BUY",
 									quantity=obj.curr_qty,
 									order_type="SL-M",
 									product=obj.product_type,
@@ -1882,7 +1883,7 @@ def multi_dsp_sell(tick, ws):
 					print str(e)
 					thread.start_new_thread(send_mail, ( obj, str(e), "error message"))
 			try:
-				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
+				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
 				print "success modified" + str(obj.order_id)
 				#email = #emailMessage('Sell Order Modified', "success, order modified. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
@@ -1896,7 +1897,7 @@ def multi_dsp_sell(tick, ws):
 			try:
 				obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
 								exchange=obj.exchange,
-								transaction_type="SELL",
+								transaction_type="BUY",
 								quantity=obj.curr_qty,
 								order_type="SL-M",
 								product=obj.product_type,
@@ -1961,7 +1962,7 @@ def myround(x, prec=2, base=.05):
 @csrf_exempt
 def home_st(request, strategy):
 	if request.method == "POST":
-		# #ipdb.set_trace()
+		# ipdb.set_trace()
 		global st
 		if 'thread_' + request.POST['ins_token'] in threads:
 			return response("failed", "already running")
