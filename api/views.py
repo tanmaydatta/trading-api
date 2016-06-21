@@ -874,6 +874,9 @@ def mon_dsp_buy(tick, ws):
 	
 
 	bid = tick[0]['last_price']
+	# print qty
+	# print sellprice
+	# return
 	# to_buy = buyprice[0]
 	#print bid
 	# return
@@ -1924,6 +1927,7 @@ threads_ws = {}
 st = {}
 st['iq_buy'] = iq_buy
 st['mon_dsp_buy'] = mon_dsp_buy
+st['mon_dsp_sell'] = mon_dsp_sell
 st['mon_buy'] = mon_buy
 st['iq_sell'] = iq_sell
 st['mon_sell'] = mon_sell
