@@ -64,9 +64,9 @@ def mon_buy(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	print sellprice
-	print qty
-	return
+	# print sellprice
+	# print qty
+	# return
 	if to_buy_i >= len(buyprice):
 		return
 	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
