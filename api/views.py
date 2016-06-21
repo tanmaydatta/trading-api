@@ -1834,7 +1834,7 @@ def multi_dsp_sell(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
-	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
+	if bid >= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
 		thread.start_new_thread( send_mail, ( obj, str(obj.symbol)+' stopped which was running on '+obj.st + " due to SL. The values were: bid:" + str(bid) + " and SL: " + str(sellprice[to_buy_i]),'Symbol Stopped' , ) )
 		threads.pop("thread_"+str(tick[0]['instrument_token'])+'$'+obj.st, None)
