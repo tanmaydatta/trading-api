@@ -1843,7 +1843,7 @@ def multi_dsp_sell(tick, ws):
 		return
 	if to_buy_i >= len(buyprice):
 		return
-	if bid >= buyprice[to_buy_i]:
+	if bid <= buyprice[to_buy_i]:
 		# #ipdb.set_trace()
 		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
 		try:
