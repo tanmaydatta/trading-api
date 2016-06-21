@@ -50,10 +50,9 @@ def mon_buy(tick, ws):
 	qsum = obj.lots*3
 	for i in range(3,10):
 		wa = wa + buyprice[i]*qsum
+		qty.append(qsum)
 		qsum = qsum*2
 		sellprice.append(wa/qsum)
-		qty.append(qsum)
-
 
 
 	# print buyprice
@@ -65,6 +64,8 @@ def mon_buy(tick, ws):
 	# to_buy = buyprice[0]
 	#print bid
 	to_buy_i = obj.to_buy_i
+	# print qty
+	# return
 	if to_buy_i >= len(buyprice):
 		return
 	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
@@ -1127,9 +1128,9 @@ def mon_sell(tick, ws):
 	qsum = obj.lots*3
 	for i in range(3,10):
 		wa = wa + buyprice[i]*qsum
+		qty.append(qsum)
 		qsum = qsum*2
 		sellprice.append(wa/qsum)
-		qty.append(qsum)
 
 
 
