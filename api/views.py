@@ -1928,6 +1928,7 @@ st = {}
 st['iq_buy'] = iq_buy
 st['mon_dsp_buy'] = mon_dsp_buy
 st['mon_dsp_sell'] = mon_dsp_sell
+st['multi_dsp_sell'] = multi_dsp_sell
 st['mon_buy'] = mon_buy
 st['iq_sell'] = iq_sell
 st['mon_sell'] = mon_sell
