@@ -467,7 +467,7 @@ def multi_dsp_buy(tick, ws):
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*qty[0])/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
-	for i in range(1,30):
+	for i in range(1,28):
 		wa = wa + (buyprice[i]*qty[i])
 		qsum = qsum + qty[i]
 		sellprice.append(wa/qsum)
