@@ -1824,7 +1824,7 @@ def multi_dsp_sell(tick, ws):
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*qty[0])/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
-	for i in range(1,30):
+	for i in range(1,28):
 		wa = wa + (buyprice[i]*qty[i])
 		qsum = qsum + qty[i]
 		sellprice.append(wa/qsum)
@@ -1874,7 +1874,7 @@ def multi_dsp_sell(tick, ws):
 					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
 									exchange=obj.exchange,
 									transaction_type="BUY",
-									quantity=obj.curr_qty,
+									quantity=obj.curr_qty + obj.qty,
 									order_type="SL-M",
 									product=obj.product_type,
 									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
@@ -1882,18 +1882,18 @@ def multi_dsp_sell(tick, ws):
 					print "success placed sell" + str(obj.order_id)
 					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
 					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
+					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty + obj.qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
 					# print(" Order placed. ID is", order_id)
 				except Exception as e:
 					print str(e)
 					thread.start_new_thread(send_mail, ( obj, str(e), "error message"))
 			try:
-				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
+				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty + obj.qty,product=obj.product_type)
 
 				print "success modified" + str(obj.order_id)
 				#email = #emailMessage('Sell Order Modified', "success, order modified. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
 				#email.send()
-				thread.start_new_thread( send_mail, ( obj, "success, order modified. Qty:"+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Modified' , ) )
+				thread.start_new_thread( send_mail, ( obj, "success, order modified. Qty:"+str(obj.curr_qty + obj.qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Modified' , ) )
 				# print(" Order placed. ID is", order_id)
 			except Exception as e:
 				print str(e)
@@ -1903,7 +1903,7 @@ def multi_dsp_sell(tick, ws):
 				obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
 								exchange=obj.exchange,
 								transaction_type="BUY",
-								quantity=obj.curr_qty,
+								quantity=obj.curr_qty + obj.qty,
 								order_type="SL-M",
 								product=obj.product_type,
 								trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
@@ -1911,7 +1911,7 @@ def multi_dsp_sell(tick, ws):
 				print "success placed sell" + str(obj.order_id)
 				#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["akshay12489@yahoo.co.in"])
 				#email.send()
-				thread.start_new_thread( send_mail, ( obj, "success, order placed. "+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
+				thread.start_new_thread( send_mail, ( obj, "success, order placed. "+str(obj.curr_qty + obj.qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
 				# print(" Order placed. ID is", order_id)
 			except Exception as e:
 				print str(e)
