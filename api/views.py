@@ -328,8 +328,8 @@ def multi_buy(tick, ws):
 	sellprice.append(buyprice[0]-obj.dpr/3.0)
 	sellprice.append(buyprice[0]-obj.dpr/8.0)
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
-	wa = buyprice[0] + buyprice[1] + buyprice[2]
-	qsum = 3.0
+	wa = (buyprice[0] + buyprice[1] + buyprice[2])*obj.lots
+	qsum = 3.0*(obj.lots)
 	for i in range(4,30):
 		wa = wa + (buyprice[i-1]*qty[i-1])
 		qsum = qsum + qty[i-1]
@@ -339,6 +339,8 @@ def multi_buy(tick, ws):
 	bid = tick[0]['last_price']
 	# to_buy = buyprice[0]
 	#print bid
+	# print sellprice
+	# return
 	to_buy_i = obj.to_buy_i
 	if bid <= sellprice[to_buy_i-1] and to_buy_i > 0:
 		obj.ws.close()
@@ -1414,8 +1416,8 @@ def multi_sell(tick, ws):
 	sellprice.append(buyprice[0]+obj.dpr/3.0)
 	sellprice.append(buyprice[0]+obj.dpr/8.0)
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
-	wa = buyprice[0] + buyprice[1] + buyprice[2]
-	qsum = 3.0
+	wa = (buyprice[0] + buyprice[1] + buyprice[2])*obj.lots
+	qsum = 3.0*(obj.lots)
 	for i in range(4,30):
 		wa = wa + (buyprice[i-1]*qty[i-1])
 		qsum = qsum + qty[i-1]
