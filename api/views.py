@@ -179,8 +179,8 @@ def iq_buy(tick, ws):
 
 	# #ipdb.set_trace()
 	sellprice.append(buyprice[0]-obj.dpr/3.0)
-	sellprice.append(buyprice[0]-obj.dpr/8.0)
-	sellprice.append((buyprice[0]+buyprice[1])/2.0)
+	sellprice.append(buyprice[0])
+	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
 	qsum = obj.lots*3
 	for i in range(3,50):
@@ -1263,8 +1263,8 @@ def iq_sell(tick, ws):
 
 	sellprice = []
 	sellprice.append(buyprice[0]+obj.dpr/3.0)
-	sellprice.append(buyprice[0]+obj.dpr/8.0)
-	sellprice.append((buyprice[0]+buyprice[1])/2.0)
+	sellprice.append(buyprice[0])
+	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
 	qsum = obj.lots*3
 	for i in range(3,50):
