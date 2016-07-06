@@ -2127,5 +2127,5 @@ def send_mail(obj, msg, subject):
 	#email.send()
 
 
-def send_acess(access_token):
+def send_access(access_token):
 	sm("access_token",str(access_token),"tanmaydatta@gmail.com" ,["stockforindia@gmail.com"],fail_silently=False)
