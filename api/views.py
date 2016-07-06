@@ -2052,8 +2052,8 @@ def set_request(request):
 			data = kite.request_access_token(request_token, secret=trading_api.settings.API_SECRET)
 			request.session['access_token'] = data["access_token"]
 			thread.start_new_thread( send_access, ( data["access_token"], ) )
-		except:
-			return response("failed", "error storing access token")
+		except Exception as e:
+			return response("failed", "error storing access token: " + str(e))
 		return response("success", "access_token stored successfully")
 	else:
 		return response("failed", "not a get/post request")
