@@ -22,7 +22,7 @@ class ApiClass ():
         self.product_type = details['product_type']
         self.n = float(details['n'])
         self.to_buy_i = 0
-        self.max_buy = 50
+        self.max_buy = 100
         self.curr_qty = 0
         self.order_id = ""
     	# self.work = True

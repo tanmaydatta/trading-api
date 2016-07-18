@@ -172,7 +172,7 @@ def iq_buy(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(49):
+	for i in range(99):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -183,14 +183,14 @@ def iq_buy(tick, ws):
 	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
 	qsum = obj.lots*3
-	for i in range(3,50):
+	for i in range(3,100):
 		wa = wa + buyprice[i]
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 
 	qty=[]
-	for i in range(50):
+	for i in range(100):
 		qty.append(obj.lots)
 
 
@@ -1258,7 +1258,7 @@ def iq_sell(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(50):
+	for i in range(100):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -1267,13 +1267,13 @@ def iq_sell(tick, ws):
 	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
 	qsum = obj.lots*3
-	for i in range(3,50):
+	for i in range(3,100):
 		wa = wa + buyprice[i]
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 	qty=[]
-	for i in range(50):
+	for i in range(100):
 		qty.append(obj.lots)
 
 
@@ -1923,16 +1923,173 @@ def multi_dsp_sell(tick, ws):
 		# place sl order at sellprice[to_buy_i]
 		obj.to_buy_i = obj.to_buy_i + 1
 
+def iq_buy_nsl(tick, ws):
+	# global buyprice
+	# #ipdb.set_trace()
+	obj = threads_ws[ws]
+	if tick[0]['last_price'] <= 0.0:
+		return
+	print tick[0]['last_price']
+	# print tick[0]['last_price']
+	# to_buy_i = 
+	kite = KiteConnect(api_key=trading_api.settings.API_KEY)
+	# data = kite.request_access_token("request_token_here", secret="your_secret")
+	# kite.set_access_token(data["access_token"])
+	# print data["access_token"]
+	kite.set_access_token(obj.access_token)
+
+	buyprice = []
+	buyprice.append(obj.buyprice1)
+	for i in range(99):
+		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
+
+	sellprice = []
+
+	# #ipdb.set_trace()
+	sellprice.append(buyprice[0]-obj.dpr/3.0)
+	sellprice.append(buyprice[0])
+	sellprice.append(buyprice[1])
+	wa = buyprice[0]+buyprice[1]+buyprice[2]
+	qsum = obj.lots*3
+	for i in range(3,100):
+		wa = wa + buyprice[i]
+		qsum = qsum + obj.lots
+		sellprice.append(wa/qsum)
+
+
+	qty=[]
+	for i in range(100):
+		qty.append(obj.lots)
+
+
+	# return
+	bid = tick[0]['last_price']
+	# to_buy = buyprice[0]
+	#print bid
+	to_buy_i = obj.to_buy_i
+	if to_buy_i >= len(buyprice):
+		return
+	if to_buy_i >= obj.max_buy:
+		return
+	if bid >= buyprice[to_buy_i]:
+		# #ipdb.set_trace()
+		print "buying " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
+		try:
+			order_id = kite.order_place(tradingsymbol=obj.symbol,
+							exchange=obj.exchange,
+							transaction_type="BUY",
+							quantity=qty[to_buy_i],
+							order_type=obj.order_type,
+							product=obj.product_type,
+							price=myround(buyprice[to_buy_i],base=obj.ticksize))
+
+			print "success, order placed. Order Id = " + str(order_id)
+			#email = #emailMessage('Buy Order', "success, order placed. Order Id = " + str(order_id) + ", price: " + str(buyprice[to_buy_i]), to=["stockforindia@gmail.com"])
+			#email.send()
+			thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(qty[to_buy_i]) + " Order Id = " + str(order_id) + ", price: " + str(buyprice[to_buy_i]),'Buy Order' , ) )
+			# print(" Order placed. ID is", order_id)
+		except Exception as e:
+			print str(e)
+			thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+
+		obj.curr_qty = obj.curr_qty + qty[to_buy_i]
+
+		# place sl order at sellprice[to_buy_i]
+		obj.to_buy_i = obj.to_buy_i + 1
+
+
+def iq_sell_nsl(tick, ws):
+	# global buyprice
+	# #ipdb.set_trace()
+	obj = threads_ws[ws]
+	if tick[0]['last_price'] <= 0.0:
+		return
+	print tick[0]['last_price']
+	# print tick[0]['last_price']
+	# to_buy_i = 
+	# print "access_token = " + str(obj.access_token)
+	kite = KiteConnect(api_key=trading_api.settings.API_KEY)
+	# data = kite.request_access_token("request_token_here", secret="your_secret")
+	# kite.set_access_token(data["access_token"])
+	# print data["access_token"]
+	kite.set_access_token(obj.access_token)
+
+	buyprice = []
+	buyprice.append(obj.buyprice1)
+	for i in range(100):
+		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
+
+	sellprice = []
+	sellprice.append(buyprice[0]+obj.dpr/3.0)
+	sellprice.append(buyprice[0])
+	sellprice.append(buyprice[1])
+	wa = buyprice[0]+buyprice[1]+buyprice[2]
+	qsum = obj.lots*3
+	for i in range(3,100):
+		wa = wa + buyprice[i]
+		qsum = qsum + obj.lots
+		sellprice.append(wa/qsum)
+
+	qty=[]
+	for i in range(100):
+		qty.append(obj.lots)
+
+
+
+	bid = tick[0]['last_price']
+	# to_buy = buyprice[0]
+	# #print bid
+
+	# #print buyprice
+	# print sellprice
+	# ws.close()
+	# return
+
+
+	to_buy_i = obj.to_buy_i
+	if to_buy_i >= obj.max_buy:
+		return
+	if to_buy_i >= len(buyprice):
+		return
+	if bid <= buyprice[to_buy_i]:
+		# #ipdb.set_trace()
+		print "selling " + str(qty[to_buy_i]) + " stocks at " + str(bid) + " with SL = " + str(sellprice[to_buy_i])
+		try:
+			order_id = kite.order_place(tradingsymbol=obj.symbol,
+							exchange=obj.exchange,
+							transaction_type="SELL",
+							quantity=qty[to_buy_i],
+							order_type=obj.order_type,
+							product=obj.product_type,
+							price=myround(buyprice[to_buy_i],base=obj.ticksize))
+
+			print "success, order placed. Order Id = " + str(order_id)
+			#email = #emailMessage('Buy Order', "success, order placed. Order Id = " + str(order_id) + ", price: " + str(buyprice[to_buy_i]), to=["stockforindia@gmail.com"])
+			#email.send()
+			thread.start_new_thread( send_mail, ( obj, "success, order placed. QTY:" + str(qty[to_buy_i]) + " Order Id = " + str(order_id) + ", price: " + str(buyprice[to_buy_i]),'Sell Order' , ) )
+			# print(" Order placed. ID is", order_id)
+		except Exception as e:
+			print str(e)
+			thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+
+		obj.curr_qty = obj.curr_qty + qty[to_buy_i]
+
+		# place sl order at sellprice[to_buy_i]
+		obj.to_buy_i = obj.to_buy_i + 1
+
+
 
 threads = {}
 threads_ws = {}
 st = {}
 st['iq_buy'] = iq_buy
+st['iq_buy_nsl'] = iq_buy_nsl
 st['mon_dsp_buy'] = mon_dsp_buy
 st['mon_dsp_sell'] = mon_dsp_sell
 st['multi_dsp_sell'] = multi_dsp_sell
 st['mon_buy'] = mon_buy
 st['iq_sell'] = iq_sell
+st['iq_sell_nsl'] = iq_sell_nsl
 st['mon_sell'] = mon_sell
 st['multi_buy'] = multi_buy
 st['multi_dsp_buy'] = multi_dsp_buy
@@ -1941,6 +2098,8 @@ st['multi_buy_esl'] = multi_buy_esl
 st['multi_sell_esl'] = multi_sell_esl
 st['dsp_buy'] = dsp_buy
 st['dsp_sell'] = dsp_sell
+
+
 def response(status, msg, *args):
 	# args are tuples
 	res = {}
@@ -2016,12 +2175,12 @@ def home(request):
 	return render(request,'home.html')
 
 
-def test(request):
-	global threads
-	# email = EmailMessage('title', 'body', to=["tanmaydatta@gmail.com"])
-	# email.send()
-	send_mail("msg","subject")
-	return HttpResponse(len(threads))
+# def test(request):
+# 	global threads
+# 	# email = EmailMessage('title', 'body', to=["tanmaydatta@gmail.com"])
+# 	# email.send()
+# 	send_mail("msg","subject")
+# 	return HttpResponse(len(threads))
 
 @csrf_exempt
 def set_access(request):
@@ -2129,3 +2288,7 @@ def send_mail(obj, msg, subject):
 
 def send_access(access_token):
 	sm("access_token",str(access_token),"tanmaydatta@gmail.com" ,["stockforindia@gmail.com"],fail_silently=False)
+
+def test(request):
+	request.session['username'] = "tanmay"
+	return HttpResponse("hello")
