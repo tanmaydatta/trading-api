@@ -182,10 +182,10 @@ def iq_buy(tick, ws):
 	sellprice.append(buyprice[0])
 	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
-	qsum = obj.lots*3
+	qsum = 3
 	for i in range(3,100):
 		wa = wa + buyprice[i]
-		qsum = qsum + obj.lots
+		qsum = qsum + 1
 		sellprice.append(wa/qsum)
 
 
