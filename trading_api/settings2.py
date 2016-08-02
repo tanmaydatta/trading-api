@@ -125,9 +125,9 @@ STATICFILES_DIRS = (
 PROJECT_DIR  = os.path.dirname(__file__) 
 STATIC_URL  = '/static/'
 
-API_KEY = "oiw1op2jfem27oo4"
+API_KEY = ""
 LOGIN = "DA3085"
-API_SECRET = "imuoofgx85rbrrcvya10kn350vpog62r"
+API_SECRET = ""
 
 
 EMAIL_USE_TLS = True
