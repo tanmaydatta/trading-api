@@ -176,15 +176,19 @@ def iq_buy(tick, ws):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
-
-	# #ipdb.set_trace()
 	sellprice.append(buyprice[0]-obj.dpr/3.0)
-	sellprice.append(buyprice[0])
-	sellprice.append(buyprice[1])
-	wa = buyprice[0]+buyprice[1]+buyprice[2]
-	qsum = obj.lots*3
-	for i in range(3,100):
-		wa = wa + buyprice[i]
+        sellprice.append(buyprice[0]-obj.dpr/8.0)
+        sellprice.append(buyprice[0])
+        sellprice.append((buyprice[0]+buyprice[1])/2.0)
+        sellprice.append(buyprice[1])
+	# #ipdb.set_trace()
+	#sellprice.append(buyprice[0]-obj.dpr/3.0)
+	#sellprice.append(buyprice[0])
+	#sellprice.append(buyprice[1])
+	wa = (buyprice[0]+buyprice[1]+buyprice[2]+buyprice[3]+buyprice[4])*obj.lots
+	qsum = 5*obj.lots
+	for i in range(5,100):
+		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
@@ -1263,12 +1267,17 @@ def iq_sell(tick, ws):
 
 	sellprice = []
 	sellprice.append(buyprice[0]+obj.dpr/3.0)
-	sellprice.append(buyprice[0])
-	sellprice.append(buyprice[1])
-	wa = buyprice[0]+buyprice[1]+buyprice[2]
-	qsum = obj.lots*3
-	for i in range(3,100):
-		wa = wa + buyprice[i]
+        sellprice.append(buyprice[0]+obj.dpr/8.0)
+        sellprice.append(buyprice[0])
+        sellprice.append((buyprice[0]+buyprice[1])/2.0)
+        sellprice.append(buyprice[1])
+	#sellprice.append(buyprice[0]+obj.dpr/3.0)
+	#sellprice.append(buyprice[0])
+	#sellprice.append(buyprice[1])
+	wa =( buyprice[0]+buyprice[1]+buyprice[2]+buyprice[3]+buyprice[4])*obj.lots
+	qsum = obj.lots*5
+	for i in range(5,100):
+		wa = wa + buyprice[i]*obj.lots
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
