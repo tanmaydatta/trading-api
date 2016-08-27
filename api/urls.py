@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'^home/$', home, name='home'),
     url(r'^home/(?P<strategy>.+)/$', home_st, name='home_st'),
     url(r'^stop/(?P<symbol>.+)/$', stop, name='stop'),
+    url(r'^flat/(?P<symbol>.+)/$', flat, name='flat'),
     url(r'^stop_all/$', stop_all, name='stop_all'),
     url(r'^running/$', running, name='running'),
     url(r'^search/(?P<symbol>.+)/$', search, name='search'),
