@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^search/(?P<symbol>.+)/$', search, name='search'),
     url(r'^set_request/$', set_request, name='set_request'),
     url(r'^set_access/$', set_access, name='set_access'),
+    url(r'^check_connection/$', check_connection, name='check_connection'),
+    url(r'^cancel/(?P<ins_token>.+)/$', cancel, name='cancel'),
 ]

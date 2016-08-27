@@ -37,3 +37,8 @@ class ApiClass ():
     def set_dsp(self, entry, qty):
         self.entry = float(entry)
         self.qty = int(qty)
+
+    def set_rsl(self, r, s, l):
+        self.r = int(r)
+        self.l = int(l)
+        self.s = int(s)
