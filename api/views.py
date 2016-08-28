@@ -34,7 +34,7 @@ def mon_buy(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(10):
+	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -48,7 +48,7 @@ def mon_buy(tick, ws):
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
 	wa = (buyprice[0]+buyprice[1]+buyprice[2])*obj.lots
 	qsum = obj.lots*3
-	for i in range(3,10):
+	for i in range(3,1000):
 		wa = wa + buyprice[i]*qsum
 		qty.append(qsum)
 		qsum = qsum*2
@@ -172,7 +172,7 @@ def iq_buy(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(99):
+	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -187,14 +187,14 @@ def iq_buy(tick, ws):
 	#sellprice.append(buyprice[1])
 	wa = (buyprice[0]+buyprice[1]+buyprice[2]+buyprice[3]+buyprice[4])*obj.lots
 	qsum = 5*obj.lots
-	for i in range(5,100):
+	for i in range(5,1000):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 
 	qty=[]
-	for i in range(100):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 
@@ -730,11 +730,11 @@ def dsp_buy(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(29):
+	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	qty=[]
-	for i in range(30):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 	sellprice = []
@@ -743,7 +743,7 @@ def dsp_buy(tick, ws):
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*obj.lots)/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
-	for i in range(1,30):
+	for i in range(1,1000):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + qty[i]
 		sellprice.append(wa/qsum)
@@ -858,13 +858,13 @@ def mon_dsp_buy(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(29):
+	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	qty=[]
 	qty.append(obj.lots)
 	qty.append(qty[0]+obj.qty)
-	for i in range(2,30):
+	for i in range(2,1000):
 		qty.append(qty[i-1]*2)
 
 	sellprice = []
@@ -873,7 +873,7 @@ def mon_dsp_buy(tick, ws):
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*obj.lots)/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
-	for i in range(1,30):
+	for i in range(1,1000):
 		wa = wa + (buyprice[i]*qty[i])
 		qsum = qsum + qty[i]
 		sellprice.append(wa/qsum)
@@ -991,13 +991,13 @@ def mon_dsp_sell(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(29):
+	for i in range(1000):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	qty=[]
 	qty.append(obj.lots)
 	qty.append(qty[0]+obj.qty)
-	for i in range(2,30):
+	for i in range(2,1000):
 		qty.append(qty[i-1]*2)
 
 	sellprice = []
@@ -1006,7 +1006,7 @@ def mon_dsp_sell(tick, ws):
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*obj.lots)/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
-	for i in range(1,30):
+	for i in range(1,1000):
 		wa = wa + (buyprice[i]*qty[i])
 		qsum = qsum + qty[i]
 		sellprice.append(wa/qsum)
@@ -1124,7 +1124,7 @@ def mon_sell(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(10):
+	for i in range(1000):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	qty=[]
@@ -1136,7 +1136,7 @@ def mon_sell(tick, ws):
 	sellprice.append((buyprice[0]+buyprice[1])/2.0)
 	wa = (buyprice[0]+buyprice[1]+buyprice[2])*obj.lots
 	qsum = obj.lots*3
-	for i in range(3,10):
+	for i in range(3,1000):
 		wa = wa + buyprice[i]*qsum
 		qty.append(qsum)
 		qsum = qsum*2
@@ -1262,7 +1262,7 @@ def iq_sell(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(100):
+	for i in range(1000):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -1276,13 +1276,13 @@ def iq_sell(tick, ws):
 	#sellprice.append(buyprice[1])
 	wa =( buyprice[0]+buyprice[1]+buyprice[2]+buyprice[3]+buyprice[4])*obj.lots
 	qsum = obj.lots*5
-	for i in range(5,100):
+	for i in range(5,1000):
 		wa = wa + buyprice[i]*obj.lots
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 	qty=[]
-	for i in range(100):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 
@@ -1684,11 +1684,11 @@ def dsp_sell(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(29):
+	for i in range(1000):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	qty=[]
-	for i in range(30):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 	sellprice = []
@@ -1697,7 +1697,7 @@ def dsp_sell(tick, ws):
 	sellprice.append((obj.entry*obj.qty + buyprice[0]*obj.lots)/(qty[0] + obj.qty))
 	wa = obj.entry*obj.qty + buyprice[0]*obj.lots
 	qsum = qty[0] + obj.qty
-	for i in range(1,30):
+	for i in range(1,1000):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + qty[i]
 		sellprice.append(wa/qsum)
@@ -1949,7 +1949,7 @@ def iq_buy_nsl(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(99):
+	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -1960,14 +1960,14 @@ def iq_buy_nsl(tick, ws):
 	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
 	qsum = obj.lots*3
-	for i in range(3,100):
+	for i in range(3,1000):
 		wa = wa + buyprice[i]
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 
 	qty=[]
-	for i in range(100):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 
@@ -2025,7 +2025,7 @@ def iq_sell_nsl(tick, ws):
 
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(100):
+	for i in range(1000):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -2034,13 +2034,13 @@ def iq_sell_nsl(tick, ws):
 	sellprice.append(buyprice[1])
 	wa = buyprice[0]+buyprice[1]+buyprice[2]
 	qsum = obj.lots*3
-	for i in range(3,100):
+	for i in range(3,1000):
 		wa = wa + buyprice[i]
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 	qty=[]
-	for i in range(100):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 
@@ -2105,7 +2105,7 @@ def iq_buy_rsl(tick, ws):
 	l = obj.l
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(100):
+	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -2121,14 +2121,14 @@ def iq_buy_rsl(tick, ws):
 	#sellprice.append(buyprice[1])
 	# wa = (buyprice[0]+buyprice[1]+buyprice[2]+buyprice[3]+buyprice[4])*obj.lots
 	# qsum = 5*obj.lots
-	for i in range(s,100):
+	for i in range(s,1000):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 
 	qty=[]
-	for i in range(100):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 
@@ -2244,7 +2244,7 @@ def iq_sell_rsl(tick, ws):
 	l = obj.l
 	buyprice = []
 	buyprice.append(obj.buyprice1)
-	for i in range(100):
+	for i in range(1000):
 		buyprice.append(buyprice[0] - float(obj.dpr*(i+1)/float(obj.n)))
 
 	sellprice = []
@@ -2257,13 +2257,13 @@ def iq_sell_rsl(tick, ws):
 	#sellprice.append(buyprice[0]+obj.dpr/3.0)
 	#sellprice.append(buyprice[0])
 	#sellprice.append(buyprice[1])
-	for i in range(s,100):
+	for i in range(s,1000):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
 
 	qty=[]
-	for i in range(100):
+	for i in range(1000):
 		qty.append(obj.lots)
 
 
