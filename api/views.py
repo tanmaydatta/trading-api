@@ -2572,8 +2572,7 @@ def flat(request, symbol):
 									product=ins["product"],
 									trigger_price=ins["average_price"])
 
-
-	return response("success", "successfully cancelled")
+	return response("success", "SL order placed")
 
 
 def stop_all(request):
