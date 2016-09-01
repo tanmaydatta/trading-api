@@ -2294,12 +2294,17 @@ def cancel(request, ins_token):
 	return response("success", "successfully cancelled")
 
 def flat(request, symbol):
+	global threads
 	kite = KiteConnect(api_key=trading_api.settings.API_KEY)
 	kite.set_access_token(request.session['access_token'])
 	positions = kite.positions()['day']
 	# #ipdb.set_trace()
 	ins_token = symbol.split('$')[0]
 	st = symbol.split("$")[1]
+	try:
+		ticksize = threads['thread_' + str(ins_token) + '$' + str(st)].ticksize
+	except:
+		return response("fail", "tick size not found")
 	for ins in positions:
 		if str(ins['instrument_token']) == str(ins_token):
 			if "buy" in st:
@@ -2309,7 +2314,7 @@ def flat(request, symbol):
 									quantity=abs(ins["quantity"]),
 									order_type="SL-M",
 									product=ins["product"],
-									trigger_price=ins["average_price"])
+									trigger_price-=myround(ins["average_price"],base=ticksize))
 			else:
 				order_id = kite.order_place(tradingsymbol=ins['tradingsymbol'],
 									exchange=ins["exchange"],
@@ -2317,7 +2322,7 @@ def flat(request, symbol):
 									quantity=abs(ins["quantity"]),
 									order_type="SL-M",
 									product=ins["product"],
-									trigger_price=ins["average_price"])
+									trigger_price=myround(ins["average_price"],base=ticksize))
 
 	return response("success", "SL order placed")
 
