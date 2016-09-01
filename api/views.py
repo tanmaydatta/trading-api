@@ -103,23 +103,7 @@ def mon_buy(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -239,23 +223,7 @@ def iq_buy(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -382,23 +350,7 @@ def multi_buy(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -519,23 +471,7 @@ def multi_dsp_buy(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty + obj.qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty + obj.qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty + obj.qty,product=obj.product_type)
 
@@ -662,23 +598,7 @@ def multi_buy_esl(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -791,23 +711,7 @@ def dsp_buy(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty+obj.qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty+obj.qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty+obj.qty,product=obj.product_type)
 
@@ -924,23 +828,7 @@ def mon_dsp_buy(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty+obj.qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty+obj.qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty+obj.qty,product=obj.product_type)
 
@@ -1054,23 +942,7 @@ def mon_dsp_sell(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty+obj.qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty+obj.qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty+obj.qty,product=obj.product_type)
 
@@ -1192,23 +1064,7 @@ def mon_sell(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:"+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Buy(SL) Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -1334,23 +1190,7 @@ def iq_sell(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:"+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Buy(SL) Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -1473,23 +1313,7 @@ def multi_sell(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:"+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Buy(SL) Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -1616,23 +1440,7 @@ def multi_sell_esl(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:"+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Buy(SL) Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -1744,23 +1552,7 @@ def dsp_sell(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty + obj.qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:"+str(obj.curr_qty+obj.qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Buy(SL) Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty+obj.qty,product=obj.product_type)
 
@@ -1881,23 +1673,7 @@ def multi_dsp_sell(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty + obj.qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty + obj.qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty + obj.qty,product=obj.product_type)
 
@@ -2176,23 +1952,7 @@ def iq_buy_rsl(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="SELL",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:" + str(obj.curr_qty) + " Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Sell Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="SELL",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
@@ -2318,23 +2078,7 @@ def iq_sell_rsl(tick, ws):
 			try:
 				order = kite.orders(order_id=obj.order_id)
 			except:
-				try:
-					obj.order_id = kite.order_place(tradingsymbol=obj.symbol,
-									exchange=obj.exchange,
-									transaction_type="BUY",
-									quantity=obj.curr_qty,
-									order_type="SL-M",
-									product=obj.product_type,
-									trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize))
-
-					print "success placed sell" + str(obj.order_id)
-					#email = #emailMessage('Sell Order Placed', "success, order placed. Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]), to=["stockforindia@gmail.com"])
-					#email.send()
-					thread.start_new_thread( send_mail, ( obj, "success, order placed. Qty:"+str(obj.curr_qty)+" Order Id = " + str(obj.order_id) + ", price: " + str(sellprice[to_buy_i]),'Buy(SL) Order Placed' , ) )
-					# print(" Order placed. ID is", order_id)
-				except Exception as e:
-					print str(e)
-					thread.start_new_thread(send_mail, ( obj, str(e) + " sl:" + str(sellprice[to_buy_i]) + " and " + str(myround(sellprice[to_buy_i],base=obj.ticksize)), "error message"))
+				pass
 			try:
 				obj.order_id = kite.order_modify(str(obj.order_id),trigger_price=myround(sellprice[to_buy_i],base=obj.ticksize), tradingsymbol=obj.symbol,exchange=obj.exchange,transaction_type="BUY",order_type="SL-M",quantity=obj.curr_qty,product=obj.product_type)
 
