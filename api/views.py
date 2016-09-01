@@ -2088,7 +2088,7 @@ def iq_sell_nsl(tick, ws):
 
 def iq_buy_rsl(tick, ws):
 	# global buyprice
-	# #ipdb.set_trace()
+	#ipdb.set_trace()
 	obj = threads_ws[ws]
 	if tick[0]['last_price'] <= 0.0:
 		return
@@ -2103,35 +2103,38 @@ def iq_buy_rsl(tick, ws):
 	r = obj.r
 	s = obj.s
 	l = obj.l
+	print r,s,l
 	buyprice = []
 	buyprice.append(obj.buyprice1)
 	for i in range(1000):
 		buyprice.append(buyprice[0] + float(obj.dpr*(i+1)/float(obj.n)))
-
+	print "buyprice done"
+#	ipdb.set_trace()
 	sellprice = []
 	wa = 0
 	qsum = 0
 	for i in range(s):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
-		sellprice.append(wa/qsum - float((r/(obj.lots*l*i))))
+		sellprice.append(wa/qsum - float((float(r)/(obj.lots*l*(i+1)))))
 	# #ipdb.set_trace()
 	#sellprice.append(buyprice[0]-obj.dpr/3.0)
 	#sellprice.append(buyprice[0])
 	#sellprice.append(buyprice[1])
 	# wa = (buyprice[0]+buyprice[1]+buyprice[2]+buyprice[3]+buyprice[4])*obj.lots
 	# qsum = 5*obj.lots
-	for i in range(s,1000):
+#	ipdb.set_trace()
+	for i in range(s,999):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
 		sellprice.append(wa/qsum)
-
+	print "sellprice done"
 
 	qty=[]
 	for i in range(1000):
 		qty.append(obj.lots)
 
-
+#        ipdb.set_trace()
 	# return
 	bid = tick[0]['last_price']
 	# to_buy = buyprice[0]
@@ -2253,7 +2256,7 @@ def iq_sell_rsl(tick, ws):
 	for i in range(s):
 		wa = wa + (buyprice[i]*obj.lots)
 		qsum = qsum + obj.lots
-		sellprice.append(wa/qsum + float((r/(obj.lots*l*i))))
+		sellprice.append(wa/qsum + float((float(r)/(obj.lots*l*(i+1)))))
 	#sellprice.append(buyprice[0]+obj.dpr/3.0)
 	#sellprice.append(buyprice[0])
 	#sellprice.append(buyprice[1])
