@@ -2314,7 +2314,7 @@ def flat(request, symbol):
 									quantity=abs(ins["quantity"]),
 									order_type="SL-M",
 									product=ins["product"],
-									trigger_price-=myround(ins["average_price"],base=ticksize))
+									trigger_price=myround(ins["average_price"],base=ticksize))
 			else:
 				order_id = kite.order_place(tradingsymbol=ins['tradingsymbol'],
 									exchange=ins["exchange"],
